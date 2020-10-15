@@ -47,6 +47,21 @@ def redirect_http_partial():
     return render_template('01.2.redirect.html')
 
 
+@app.route('/redirect_http_partial_no_scheme')
+def redirect_http_partial_no_scheme():
+    return render_template('01.4.redirect.html')
+
+
+@app.route('/subdir/redirect_http_partial_no_slash')
+def redirect_http_partial_no_slash():
+    return render_template('01.5.redirect.html')
+
+
+@app.route('/subdir/redirect_http_partial_no_slash_dest')
+def redirect_http_partial_no_slash_dest():
+    return render_template('01.1.redirect.html')
+
+
 @app.route('/subdir/redirect_http_path')
 def redirect_http_path():
     return render_template('01.3.redirect.html')
