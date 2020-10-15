@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+{% block title %}Lookyloo Testing{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+<ul>
+    <li><a href={{ url_for('redirect_http') }}>Redirect HTTP</a></li>
+    <li><a href={{ url_for('redirect_http_partial') }}>Redirect HTTP Partial</a></li>
+    <li><a href={{ url_for('redirect_http_path') }}>Redirect HTTP Path</a></li>
+    <li><a href={{ url_for('redirect_js_loc') }}>Redirect Js location</a></li>
+    <li><a href={{ url_for('redirect_js_loc_replace') }}>Redirect Js location replace</a></li>
+    <li><a href={{ url_for('redirect_js_loc_assign') }}>Redirect Js location assign</a></li>
+    <li><a href={{ url_for('redirect_js_obfs') }}>Redirect Js obfuscated</a></li>
+</ul>
+
+{% endblock %}

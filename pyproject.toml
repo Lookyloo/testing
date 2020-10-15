@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "lookyloo-testing"
+version = "0.1.0"
+description = "Simple webserver for testing lookyloo"
+authors = ["Raphaël Vinot <raphael@lookyloo.eu>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Flask = "^1.1.2"
+Bootstrap-Flask = "^1.5"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
