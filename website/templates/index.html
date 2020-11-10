@@ -11,6 +11,16 @@
 
 {% block content %}
 
+<h2>Server side</h2>
+<ul>
+  <li><a href={{ url_for('server_side_redirect') }}>3XX</a></li>
+  <li><a href={{ url_for('raise_404') }}>404</a></li>
+  <li><a href={{ url_for('ua') }}>User Agent</a></li>
+  <li><a href={{ url_for('ip') }}>IP Address</a></li>
+</ul>
+
+
+<h2>In Page</h2>
 <ul>
     <li><a href={{ url_for('redirect_http') }}>Redirect HTTP</a></li>
     <li><a href={{ url_for('redirect_http_path') }}>Redirect HTTP Path</a></li>

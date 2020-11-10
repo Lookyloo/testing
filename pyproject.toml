@@ -9,6 +9,7 @@ license = "MIT"
 python = "^3.8"
 Flask = "^1.1.2"
 Bootstrap-Flask = "^1.5"
+ip2geotools = "^0.1.5"
 
 [tool.poetry.dev-dependencies]
 
