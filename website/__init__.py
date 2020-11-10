@@ -39,49 +39,59 @@ def index():
 
 @app.route('/redirect_http')
 def redirect_http():
+    '''Simple redirect to a complete URL'''
     return render_template('01.1.redirect.html')
 
 
 @app.route('/redirect_http_partial')
 def redirect_http_partial():
+    '''Redirect to redirect_http (path only, no slash)'''
     return render_template('01.2.redirect.html')
 
 
 @app.route('/redirect_http_partial_no_scheme')
 def redirect_http_partial_no_scheme():
+    '''Redirect to full URL, but without the schema  (will use the same schema as the originator)'''
     return render_template('01.4.redirect.html')
 
 
 @app.route('/subdir/redirect_http_partial_no_slash')
 def redirect_http_partial_no_slash():
+    '''Redirect to redirect_http_partial_no_slash_dest (partial path)'''
     return render_template('01.5.redirect.html')
 
 
 @app.route('/subdir/redirect_http_partial_no_slash_dest')
 def redirect_http_partial_no_slash_dest():
+    '''Renders the same page as redirect_http, redirect to full URL'''
     return render_template('01.1.redirect.html')
 
 
 @app.route('/subdir/redirect_http_path')
 def redirect_http_path():
+    '''Redirect to ../redirect_http (full path)'''
     return render_template('01.3.redirect.html')
 
 
 @app.route('/redirect_js_loc')
 def redirect_js_loc():
+    '''Change window.location.href, full URL'''
     return render_template('02.1.redirect.html')
 
 
 @app.route('/redirect_js_loc_replace')
 def redirect_js_loc_replace():
+    '''Use window.location.replace, with timer and full URL'''
     return render_template('02.2.redirect.html')
 
 
 @app.route('/redirect_js_loc_assign')
 def redirect_js_loc_assign():
+    '''Use window.location.assign, with timer and full URL'''
     return render_template('02.3.redirect.html')
 
 
 @app.route('/redirect_js_obfs')
 def redirect_js_obfs():
+    '''Obfuscated JS call, full URL'''
     return render_template('02.4.redirect.html')
