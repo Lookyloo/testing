@@ -1,6 +1,6 @@
 [[package]]
 name = "bootstrap-flask"
-version = "1.5"
+version = "1.5.1"
 description = "Bootstrap helper for Flask/Jinja2."
 category = "main"
 optional = false
@@ -89,8 +89,8 @@ content-hash = "bd9a3b87e6c84685f3147ebf8fe929ad2dd7c2f05293aaa9e4ec8c53c75d83c3
 
 [metadata.files]
 bootstrap-flask = [
-    {file = "Bootstrap-Flask-1.5.tar.gz", hash = "sha256:94b8e67f7ba15e8e6ba83e7ca30aa784f45c8d713a18d8fbf013a59ce9370954"},
-    {file = "Bootstrap_Flask-1.5-py2.py3-none-any.whl", hash = "sha256:77f26a4ecd749063433b0e8780652c41c1c29bc91bf88756f07330fef3158cbb"},
+    {file = "Bootstrap-Flask-1.5.1.tar.gz", hash = "sha256:4813ab4b7cd35fe16ebd15789b4edb45ed6e528c8eb6f44790efba48e8410ebc"},
+    {file = "Bootstrap_Flask-1.5.1-py2.py3-none-any.whl", hash = "sha256:b2716e60289fa7d636b633614717a338dc5cae144bdf8983680403193b891305"},
 ]
 click = [
     {file = "click-7.1.2-py2.py3-none-any.whl", hash = "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"},
