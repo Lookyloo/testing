@@ -133,6 +133,7 @@ def ua():
 
 @app.route('/ip')
 def ip():
+    '''Redirects to different places depending on the CC of the IP doing the request'''
     ip = ipaddress.ip_address(request.remote_addr)
     try:
         response = DbIpCity.get(ip, api_key='free')

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Your IP and CC</title>
+    {% if cc == 'LU' %}
+    <head>
+      <meta http-equiv="Refresh" content="2; url='https://youtu.be/fBp36bUdW0s?t=320'" />
+    </head>
+    {% elif cc == 'FR' %}
+    <head>
+      <meta http-equiv="Refresh" content="2; url='https://youtu.be/fBp36bUdW0s?t=52'" />
+    </head>
+    {% else%}
+    <head>
+      <meta http-equiv="Refresh" content="2; url='https://youtu.be/fBp36bUdW0s?t=65'" />
+    </head>
+    {% endif %}
+  </head>
+  <body>
+    <h2>{{ip}}</h2>
+    <h2>{{cc}}</h2>
+  </body>
+</html>
