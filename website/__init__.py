@@ -7,7 +7,7 @@ import ipaddress
 
 from ip2geotools.databases.noncommercial import DbIpCity
 
-from flask import Flask, render_template, request, url_for, redirect, make_response
+from flask import Flask, render_template, request, url_for, redirect, make_response, Response
 from flask_bootstrap import Bootstrap  # type: ignore
 
 from .helpers import get_homedir
@@ -75,6 +75,47 @@ def redirect_http_path():
     '''Redirect to ../redirect_http (full path)'''
     return render_template('01.3.redirect.html')
 
+
+@app.route('/url_parameter')
+def url_parameter():
+    '''Redirect based on url parameters'''
+    args = request.args
+    if 'blah' in args:
+        # Redirect to self, parameters only
+        resp = Response("Location header partial")
+        resp.headers['Location'] = '?foo=bar'
+        return make_response(resp, 302)
+    elif 'foo' in args:
+        # final redirect if blah was in the parameters
+        return render_template('01.1.redirect.html')
+    elif 'query_dest' in args:
+        # called with meta http-equiv if there is a query parameter in the URL
+        return render_template('01.1.redirect.html')
+    return render_template('special.html', args=args)
+
+
+@app.route('/refresh_header')
+def refresh_header():
+    resp = Response("Refresh header")
+    resp.headers['Refresh'] = '0; /redirect_http'
+    return resp
+
+
+@app.route('/location_header')
+def location_header():
+    resp = Response("Location header")
+    resp.headers['Location'] = '/redirect_http'
+    return make_response(resp, 302)
+
+
+@app.route('/location_header_partial')
+def location_header_partial():
+    resp = Response("Location header partial")
+    resp.headers['Location'] = 'url_parameter?blah=foo'
+    return make_response(resp, 302)
+
+
+# JS redirects
 
 @app.route('/redirect_js_loc')
 def redirect_js_loc():

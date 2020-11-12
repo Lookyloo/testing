@@ -17,6 +17,9 @@
   <li><a href={{ url_for('raise_404') }}>404</a></li>
   <li><a href={{ url_for('ua') }}>User Agent</a></li>
   <li><a href={{ url_for('ip') }}>IP Address</a></li>
+  <li><a href={{ url_for('refresh_header') }}>Refresh header</a></li>
+  <li><a href={{ url_for('location_header') }}>Location header</a></li>
+  <li><a href={{ url_for('location_header_partial') }}>Location header (partial)</a></li>
 </ul>
 
 
@@ -27,6 +30,7 @@
     <li><a href={{ url_for('redirect_http_partial') }}>Redirect HTTP Partial</a></li>
     <li><a href={{ url_for('redirect_http_partial_no_scheme') }}>Redirect HTTP Partial no scheme</a></li>
     <li><a href={{ url_for('redirect_http_partial_no_slash') }}>Redirect HTTP Partial no slash</a></li>
+    <li><a href={{ url_for('url_parameter', query=1) }}>Redirect of parameter only</a></li>
     <li><a href={{ url_for('redirect_js_loc') }}>Redirect Js location</a></li>
     <li><a href={{ url_for('redirect_js_loc_replace') }}>Redirect Js location replace</a></li>
     <li><a href={{ url_for('redirect_js_loc_assign') }}>Redirect Js location assign</a></li>
