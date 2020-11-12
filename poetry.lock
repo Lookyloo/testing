@@ -243,6 +243,20 @@ requests = ">=2.24.0,<3.0.0"
 urllib3 = ">=1.25.2,<2.0.0"
 
 [[package]]
+name = "gunicorn"
+version = "20.0.4"
+description = "WSGI HTTP Server for UNIX"
+category = "main"
+optional = false
+python-versions = ">=3.4"
+
+[package.extras]
+eventlet = ["eventlet (>=0.9.7)"]
+gevent = ["gevent (>=0.13)"]
+setproctitle = ["setproctitle"]
+tornado = ["tornado (>=0.2)"]
+
+[[package]]
 name = "idna"
 version = "2.10"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -743,7 +757,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "3.8.1"
-content-hash = "7a9764d2b3e688368755746bdd9b420cae614757e7ffb9ff1d667b53e99795e1"
+content-hash = "7632705d2c3d93a0c5ffe266118b300988c7adee96ef5fae5332dd9f4ecf5d45"
 
 [metadata.files]
 aiohttp = [
@@ -910,6 +924,10 @@ geocoder = [
 geoip2 = [
     {file = "geoip2-4.1.0-py2.py3-none-any.whl", hash = "sha256:707025542ef076bd8fd80e97138bebdb7812527b2a007d141a27ad98b0370fff"},
     {file = "geoip2-4.1.0.tar.gz", hash = "sha256:57d8d15de2527e0697bbef44fc16812bba709f03a07ef99297bd56c1df3b1efd"},
+]
+gunicorn = [
+    {file = "gunicorn-20.0.4-py2.py3-none-any.whl", hash = "sha256:cd4a810dd51bf497552cf3f863b575dabd73d6ad6a91075b65936b151cbf4f9c"},
+    {file = "gunicorn-20.0.4.tar.gz", hash = "sha256:1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626"},
 ]
 idna = [
     {file = "idna-2.10-py2.py3-none-any.whl", hash = "sha256:b97d804b1e9b523befed77c48dacec60e6dcb0b5391d57af6a65a312a90648c0"},
