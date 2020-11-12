@@ -6,7 +6,7 @@ authors = ["Raphaël Vinot <raphael@lookyloo.eu>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8.1"
+python = "3.8.1"
 Flask = "^1.1.2"
 Bootstrap-Flask = "^1.5"
 ip2geotools = "^0.1.5"
