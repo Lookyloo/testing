@@ -115,6 +115,12 @@ def location_header_partial():
     return make_response(resp, 302)
 
 
+@app.route('/frame')
+def http_frame():
+    '''Load a URL in a frame, no actual redirect'''
+    return render_template('03.1.frame.html')
+
+
 # JS redirects
 
 @app.route('/redirect_js_loc')

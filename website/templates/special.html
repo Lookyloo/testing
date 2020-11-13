@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Special queries and redirects</title>
+    </head>
+    <body>
+      <h2>Parameters</h2>
+      <ul>
+      {% for k, v in args.items() %}
+        <li><b>{{k}}</b>: {{v}}</li>
+      {% endfor %}
+      </ul>
+      {% if args['query'] %}
+      <meta http-equiv="Refresh" content="1; url='?query_dest=1'" />
+      {%endif%}
+    </body>
+</html>
