@@ -121,6 +121,29 @@ def http_frame():
     return render_template('03.1.frame.html')
 
 
+@app.route('/cookie')
+def cookie():
+    '''Redirecting properly only if the cookie is right'''
+    name = request.cookies.get('UserID')
+    if name and name == 'Eduard' or name == 'Khil':
+        return render_template('01.1.redirect.html')
+
+    resp = Response("Nay")
+    resp.headers['Location'] = 'https://en.wikipedia.org/wiki/Eduard_Khil'
+    return make_response(resp, 302)
+
+
+@app.route('/referer')
+def referer():
+    '''Redirecting properly only if the referer is right'''
+    referer = request.headers.get("Referer")
+    if referer and referer == 'http://circl.lu':
+        return render_template('01.1.redirect.html')
+    resp = Response("Nay")
+    resp.headers['Location'] = '//google.dk'
+    return make_response(resp, 302)
+
+
 # JS redirects
 
 @app.route('/redirect_js_loc')
