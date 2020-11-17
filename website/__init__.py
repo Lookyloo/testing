@@ -94,54 +94,10 @@ def url_parameter():
     return render_template('special.html', args=args)
 
 
-@app.route('/refresh_header')
-def refresh_header():
-    resp = Response("Refresh header")
-    resp.headers['Refresh'] = '0; /redirect_http'
-    return resp
-
-
-@app.route('/location_header')
-def location_header():
-    resp = Response("Location header")
-    resp.headers['Location'] = '/redirect_http'
-    return make_response(resp, 302)
-
-
-@app.route('/location_header_partial')
-def location_header_partial():
-    resp = Response("Location header partial")
-    resp.headers['Location'] = 'url_parameter?blah=foo'
-    return make_response(resp, 302)
-
-
 @app.route('/frame')
 def http_frame():
     '''Load a URL in a frame, no actual redirect'''
     return render_template('03.1.frame.html')
-
-
-@app.route('/cookie')
-def cookie():
-    '''Redirecting properly only if the cookie is right'''
-    name = request.cookies.get('UserID')
-    if name and name == 'Eduard' or name == 'Khil':
-        return render_template('01.1.redirect.html')
-
-    resp = Response("Nay")
-    resp.headers['Location'] = 'https://en.wikipedia.org/wiki/Eduard_Khil'
-    return make_response(resp, 302)
-
-
-@app.route('/referer')
-def referer():
-    '''Redirecting properly only if the referer is right'''
-    referer = request.headers.get("Referer")
-    if referer and referer == 'http://circl.lu':
-        return render_template('01.1.redirect.html')
-    resp = Response("Nay")
-    resp.headers['Location'] = '//google.dk'
-    return make_response(resp, 302)
 
 
 # JS redirects
@@ -170,6 +126,18 @@ def redirect_js_obfs():
     return render_template('02.4.redirect.html')
 
 
+@app.route('/redirect_js_partial')
+def redirect_js_partial():
+    '''Redirect with JS to partial URL'''
+    return render_template('02.5.redirect.html')
+
+
+@app.route('/subdir/redirect_js_partial_subdir')
+def redirect_js_partial_subdir():
+    '''Redirect with JS to partial URL, from subdit'''
+    return render_template('02.6.redirect.html')
+
+
 # server side stuff
 
 @app.route('/server_side_redirect')
@@ -182,6 +150,27 @@ def server_side_redirect():
 def raise_404():
     '''Trigger a 404, but still redirect'''
     return make_response(render_template('01.1.redirect.html'), 404)
+
+
+@app.route('/refresh_header')
+def refresh_header():
+    resp = Response("Refresh header")
+    resp.headers['Refresh'] = '0; /redirect_http'
+    return resp
+
+
+@app.route('/location_header')
+def location_header():
+    resp = Response("Location header")
+    resp.headers['Location'] = '/redirect_http'
+    return make_response(resp, 302)
+
+
+@app.route('/location_header_partial')
+def location_header_partial():
+    resp = Response("Location header partial")
+    resp.headers['Location'] = 'url_parameter?blah=foo'
+    return make_response(resp, 302)
 
 
 @app.route('/user_agent')
@@ -211,3 +200,26 @@ def ip():
     except Exception:
         cc = 'No Clue.'
     return render_template('ip.html', ip=ip, cc=cc)
+
+
+@app.route('/cookie')
+def cookie():
+    '''Redirecting properly only if the cookie is right'''
+    name = request.cookies.get('UserID')
+    if name and name == 'Eduard' or name == 'Khil':
+        return render_template('01.1.redirect.html')
+
+    resp = Response("Nay")
+    resp.headers['Location'] = 'https://en.wikipedia.org/wiki/Eduard_Khil'
+    return make_response(resp, 302)
+
+
+@app.route('/referer')
+def referer():
+    '''Redirecting properly only if the referer is right'''
+    referer = request.headers.get("Referer")
+    if referer and referer == 'http://circl.lu':
+        return render_template('01.1.redirect.html')
+    resp = Response("Nay")
+    resp.headers['Location'] = '//google.dk'
+    return make_response(resp, 302)
