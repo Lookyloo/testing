@@ -211,6 +211,7 @@ def cookie():
 
     resp = Response("Nay")
     resp.headers['Location'] = 'https://en.wikipedia.org/wiki/Eduard_Khil'
+    resp.headers['X-Cookie'] = 'UserID=???'
     return make_response(resp, 302)
 
 
@@ -222,4 +223,5 @@ def referer():
         return render_template('01.1.redirect.html')
     resp = Response("Nay")
     resp.headers['Location'] = '//google.dk'
+    resp.headers['X-Referer'] = 'Not circl.lu'
     return make_response(resp, 302)
