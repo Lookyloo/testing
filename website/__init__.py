@@ -4,6 +4,7 @@
 import os
 from pathlib import Path
 import ipaddress
+import uuid
 
 from ip2geotools.databases.noncommercial import DbIpCity
 
@@ -136,6 +137,28 @@ def redirect_js_partial():
 def redirect_js_partial_subdir():
     '''Redirect with JS to partial URL, from subdit'''
     return render_template('02.6.redirect.html')
+
+
+@app.route('/history_pushstate')
+def history_pushstate():
+    '''Use History.pushstate to block backing out, submit hidden form'''
+    args = request.args
+    if 'try_go_back' in args:
+        return render_template('i_see_you.html')
+    if 'refer' in args:
+        return render_template('02.5.redirect.html')
+    return render_template('04.1.hell.html')
+
+
+@app.route('/stats')
+def stats():
+    return str(uuid.uuid4())
+
+
+@app.route('/history_pushstate_landing')
+def history_pushstate_landing():
+    '''Use History.pushstate to trigger a redirect from hell'''
+    return render_template('04.1.hell.html')
 
 
 # server side stuff
