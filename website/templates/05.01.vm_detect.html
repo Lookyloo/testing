@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>VM detect with webgl</title>
+    </head>
+    <body>
+      <p>If you're not a bot, you will be redirect to something magical...</p>
+    </body>
+  <script>
+var canvas = document.createElement('canvas');
+var gl = canvas.getContext('webgl');
+var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+var vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+var renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+console.log(vendor);
+console.log(renderer);
+var width = screen.width;
+var height = screen.height;
+var color_depth = screen.colorDepth;
+
+setTimeout(function(){
+  if (true) {
+    // seems we use data above to check render!
+    if (/swiftshader/i.test(renderer.toLowerCase()) || /llvmpipe/i.test(renderer.toLowerCase()) || /virtualbox/i.test(renderer.toLowerCase()) || !renderer) {
+      // blacklist!
+      console.log("Virtual Machine / RDP");
+    }
+    else if (color_depth < 24 || width < 100 || width < 100 || !color_depth) {
+      alert('bot detected')
+      console.log("No Display (Probably Bot)")
+    }
+    else {
+      window.location.href = '/history_pushstate'; // document ready
+    }
+  }
+}, 200);
+  </script>
+</html>

@@ -161,6 +161,14 @@ def history_pushstate_landing():
     return render_template('04.1.hell.html')
 
 
+# JS VM detect
+
+@app.route('/vm_webgl')
+def vm_webgl():
+    '''Use WebGL info to detect VMs'''
+    return render_template('05.01.vm_detect.html')
+
+
 # server side stuff
 
 @app.route('/server_side_redirect')
