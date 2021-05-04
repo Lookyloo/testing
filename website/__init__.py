@@ -65,6 +65,18 @@ def redirect_http_partial_no_slash():
     return render_template('01.5.redirect.html')
 
 
+@app.route('/http_redirect_param')
+def redirect_param():
+    '''HTTP refresh to ;param=3'''
+    return render_template('01.6.redirect.html')
+
+
+@app.route('/;param=3')
+def redirect_param_final():
+    '''Render default redirect page.'''
+    return render_template('01.1.redirect.html')
+
+
 @app.route('/subdir/redirect_http_partial_no_slash_dest')
 def redirect_http_partial_no_slash_dest():
     '''Renders the same page as redirect_http, redirect to full URL'''
@@ -85,6 +97,11 @@ def url_parameter():
         # Redirect to self, parameters only
         resp = Response("Location header partial")
         resp.headers['Location'] = '?foo=bar'
+        return make_response(resp, 302)
+    if 'baz' in args:
+        # Redirect to self, parameters only
+        resp = Response("Location header partial")
+        resp.headers['Location'] = ';param=3'
         return make_response(resp, 302)
     elif 'foo' in args:
         # final redirect if blah was in the parameters
@@ -135,8 +152,26 @@ def redirect_js_partial():
 
 @app.route('/subdir/redirect_js_partial_subdir')
 def redirect_js_partial_subdir():
-    '''Redirect with JS to partial URL, from subdit'''
+    '''Redirect with JS to partial URL, from subdir'''
     return render_template('02.6.redirect.html')
+
+
+@app.route('/url_search_params')
+def redirect_js_url_search_params():
+    '''Use URLSearchParams'''
+    args = request.args
+    if 'param' in args:
+        return render_template('01.1.redirect.html')
+    return render_template('02.7.redirect.html')
+
+
+@app.route('/url_search_params_history')
+def redirect_js_url_search_params_history():
+    '''Use URLSearchParams and History'''
+    args = request.args
+    if 'param' in args:
+        return render_template('01.1.redirect.html')
+    return render_template('02.8.redirect.html')
 
 
 @app.route('/history_pushstate')

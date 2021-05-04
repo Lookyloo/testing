@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wait for it...</title>
+  </head>
+  <body>
+    <script>
+      var searchParams = new URLSearchParams(window.location.search);
+      searchParams.set("param", "3");
+      window.location.search = searchParams.toString();
+    </script>
+  </body>
+</html>

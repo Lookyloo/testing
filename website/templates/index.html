@@ -20,6 +20,7 @@
   <li><a href={{ url_for('refresh_header') }}>Refresh header</a></li>
   <li><a href={{ url_for('location_header') }}>Location header</a></li>
   <li><a href={{ url_for('location_header_partial') }}>Location header (partial)</a></li>
+  <li><a href={{ url_for('url_parameter', baz=1) }}>Location header to parameter starting with a ";"</a></li>
   <li><a href={{ url_for('referer') }}>Proper redirect requires a referer</a></li>
   <li><a href={{ url_for('cookie') }}>Proper redirect requires a cookie</a></li>
 </ul>
@@ -32,6 +33,7 @@
     <li><a href={{ url_for('redirect_http_partial') }}>Redirect HTTP Partial</a></li>
     <li><a href={{ url_for('redirect_http_partial_no_scheme') }}>Redirect HTTP Partial no scheme</a></li>
     <li><a href={{ url_for('redirect_http_partial_no_slash') }}>Redirect HTTP Partial no slash (sub directory)</a></li>
+    <li><a href={{ url_for('redirect_param') }}>HTTP refresh to parameter starting with ";"</a></li>
     <li><a href={{ url_for('url_parameter', query=1) }}>Redirect of parameter only</a></li>
     <li><a href={{ url_for('url_parameter', blah=1) }}>Redirect of parameter only (Partial URL)</a></li>
     <li><a href={{ url_for('http_frame') }}>iFrame</a></li>
@@ -43,6 +45,8 @@
     <li><a href={{ url_for('redirect_js_partial_subdir') }}>Redirect Js partial (sub directory)</a></li>
     <li><a href={{ url_for('history_pushstate') }}>Just good luck with that</a></li>
     <li><a href={{ url_for('vm_webgl') }}>Use WebGL to detect a VM</a></li>
+    <li><a href={{ url_for('redirect_js_url_search_params') }}>Change URL with URLSearchParams</a></li>
+    <li><a href={{ url_for('redirect_js_url_search_params_history') }}>Change URL with URLSearchParams and History</a></li>
 </ul>
 
 {% endblock %}

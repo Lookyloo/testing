@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wait for it...</title>
+  </head>
+  <body>
+    <script>
+      if ('URLSearchParams' in window) {
+        var searchParams = new URLSearchParams(window.location.search);
+        searchParams.set("param", "3");
+        var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+        history.pushState(null, '', newRelativePathQuery);
+        window.location.reload(true);
+      }
+      else {
+        document.write("URLSearchParams not supported!");
+      }
+    </script>
+  </body>
+</html>
