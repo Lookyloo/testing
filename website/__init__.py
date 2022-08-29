@@ -9,7 +9,7 @@ import uuid
 from ip2geotools.databases.noncommercial import DbIpCity
 
 from flask import Flask, render_template, request, url_for, redirect, make_response, Response
-from flask_bootstrap import Bootstrap  # type: ignore
+from flask_bootstrap import Bootstrap4  # type: ignore
 
 from .helpers import get_homedir
 from .proxied import ReverseProxied
@@ -26,7 +26,7 @@ if not secret_file_path.exists() or secret_file_path.stat().st_size < 64:
 with secret_file_path.open('rb') as f:
     app.config['SECRET_KEY'] = f.read()
 
-Bootstrap(app)
+Bootstrap4(app)
 app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 app.config['SESSION_COOKIE_NAME'] = 'lookyloo-testing'
 
