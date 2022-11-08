@@ -299,3 +299,4 @@ def update():
     """Idea from: https://dev.to/soumyaranjannaik/automatically-deploying-django-app-to-pythonanywhere-through-github-282j"""
     repo = git.Repo("../.git")
     repo.remote('origin').pull()
+    return make_response('OK', 200)
