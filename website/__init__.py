@@ -297,6 +297,11 @@ def referer():
 @app.route('/update', methods=['POST'])
 def update():
     """Idea from: https://dev.to/soumyaranjannaik/automatically-deploying-django-app-to-pythonanywhere-through-github-282j"""
-    repo = git.Repo("../.git")
+    self_path = Path("../.git")
+    python_anywhere_path = Path("testing")
+    if self_path.exists():
+        repo = git.Repo(self_path)
+    else:
+        repo = git.Repo(python_anywhere_path)
     repo.remote('origin').pull('main')
     return make_response('OK', 200)
