@@ -10,6 +10,7 @@ from ip2geotools.databases.noncommercial import DbIpCity
 
 from flask import Flask, render_template, request, url_for, redirect, make_response, Response
 from flask_bootstrap import Bootstrap4  # type: ignore
+import git
 
 from .helpers import get_homedir
 from .proxied import ReverseProxied
@@ -291,3 +292,10 @@ def referer():
     resp.headers['Location'] = '//google.dk'
     resp.headers['X-Referer'] = 'Not circl.lu'
     return make_response(resp, 302)
+
+
+@app.route('/update', methods=['POST'])
+def update():
+    """Idea from: https://dev.to/soumyaranjannaik/automatically-deploying-django-app-to-pythonanywhere-through-github-282j"""
+    repo = git.Repo("../.git")
+    repo.remote('origin').pull()
