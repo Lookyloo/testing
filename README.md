@@ -5,4 +5,4 @@ is a simple webservice used to show in a relatively easy way what happen on web 
 
 And it will be used in Lookyloo testsuite.
 
-You can browse the examples on [heroku](https://lookyloo-testing.herokuapp.com/).
+You can browse the examples on [pythonanywhere](http://rafiot.eu.pythonanywhere.com/).
