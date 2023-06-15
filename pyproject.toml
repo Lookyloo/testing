@@ -17,5 +17,5 @@ gitpython = "^3.1.31"
 [tool.poetry.dev-dependencies]
 
 [build-system]
-requires = ["poetry-core>=1.2"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
