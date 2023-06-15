@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os
-from pathlib import Path
 import ipaddress
+import os
 import uuid
 
-from ip2geotools.databases.noncommercial import DbIpCity
+from pathlib import Path
+from typing import Optional
+
+import git
 
 from flask import Flask, render_template, request, url_for, redirect, make_response, Response
-from flask_bootstrap import Bootstrap4  # type: ignore
-import git
+from flask_bootstrap import Bootstrap5  # type: ignore
+from flask_httpauth import HTTPDigestAuth  # type: ignore
+from flask_wtf import FlaskForm
+from ip2geotools.databases.noncommercial import DbIpCity  # type: ignore
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired
 
 from .helpers import get_homedir
 from .proxied import ReverseProxied
@@ -18,18 +24,31 @@ from .proxied import ReverseProxied
 
 app: Flask = Flask(__name__)
 app.wsgi_app = ReverseProxied(app.wsgi_app)  # type: ignore
-
 secret_file_path: Path = get_homedir() / 'secret_key'
 if not secret_file_path.exists() or secret_file_path.stat().st_size < 64:
     with secret_file_path.open('wb') as f:
         f.write(os.urandom(64))
 
-with secret_file_path.open('rb') as f:
-    app.config['SECRET_KEY'] = f.read()
+with secret_file_path.open('rb') as fb:
+    app.config['SECRET_KEY'] = fb.read()
 
-Bootstrap4(app)
+Bootstrap5(app)
 app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 app.config['SESSION_COOKIE_NAME'] = 'lookyloo-testing'
+
+auth = HTTPDigestAuth()
+
+users = {
+    "phishing": "example"
+}
+
+
+@auth.get_password
+def get_pw(username):
+    if username in users:
+        return users.get(username)
+    return None
+
 
 app.debug = False
 
@@ -305,3 +324,30 @@ def update():
         repo = git.Repo(python_anywhere_path)
     repo.remote('origin').pull('main')
     return make_response('OK', 200)
+
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField()
+
+
+@app.route('/sample_phish', methods=['POST', 'GET'])
+@app.route('/sample_phish/<string:email>', methods=['POST', 'GET'])
+@auth.login_required
+def sample_phish(email: Optional[str]=None):
+    '''Password protected phishing page'''
+    name = "dear user"
+    domain = "google.com"
+    if request.method == 'GET':
+        if email:
+            name, domain = email.split('@', 1)
+        form = LoginForm()
+        password = ''
+    else:
+        form = None
+        email = request.form['username']
+        if '@' in email:
+            name, domain = email.split('@', 1)
+        password = request.form['password']
+    return render_template('06.1.phishing.html', domain=domain, name=name, password=password, form=form)
