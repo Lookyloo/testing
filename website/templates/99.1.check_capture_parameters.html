@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+        {% endblock %}
+
+        <title>Display the parameters you passed to the capture as they're interpreted by the browser</title>
+        {% endblock %}
+    </head>
+    <body>
+        <!-- Your page content -->
+        {% block content %}
+        <div class="container">
+          <div><b>Referer</b>: <span id='referer'></span></div>
+          <div><b>User Agent</b>: <span id='user_agent'></span></div>
+          <div><b>Do Not Track</b>: <span id='dnt'></span></div>
+          <div><b>Manual Test Header</b>: <span id='mth'></span></div>
+
+          <div><b>Timezone</b>: <span id='timezone'></span></div>
+          <div><b>Locale</b>: <span id='locale'></span></div>
+          <div><b>Color Scheme</b>: <span id='color_scheme'></span></div>
+
+          <div><b>Geolocation</b>:
+          <span>
+            <p id="status"></p>
+            <a id="map-link" target="_blank"></a>
+          <span></div>
+
+          <div><b>Mobile (chromium only)</b>: <span id='mobile'></span></div>
+        </div>
+        {% endblock %}
+
+        {% block scripts %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }}
+            <script>
+              const referer = "{{referer}}";
+              const user_agent = "{{user_agent}}";
+              const dnt = "{{dnt}}";
+              const manual_test_header = "{{manual_test_header}}";
+
+              document.addEventListener("DOMContentLoaded", (event) => {
+                document.getElementById("referer").innerHTML = referer;
+                document.getElementById("user_agent").innerHTML = user_agent;
+                document.getElementById("dnt").innerHTML = dnt;
+                document.getElementById("mth").innerHTML = manual_test_header;
+
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                document.getElementById("timezone").innerHTML = timezone;
+                document.getElementById("locale").innerHTML = navigator.language;
+
+                const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                const lightModePreference = window.matchMedia("(prefers-color-scheme: light)").matches;
+                let cs = "unknown";
+                if (darkModePreference) {
+                    cs = "dark";
+                }
+                else if (lightModePreference) {
+                    cs = "light";
+                }
+                document.getElementById("color_scheme").innerHTML = cs;
+
+                getLoc();
+                // Chromium only
+                let mobile = "";
+                if (navigator.userAgentData) {
+                    mobile = navigator.userAgentData.mobile;
+                }
+                document.getElementById("mobile").innerHTML = mobile;
+
+                document.cookie = `referer=${referer}`;
+                document.cookie = `user_agent=${user_agent}`;
+                document.cookie = `dnt=${dnt}`;
+                document.cookie = `manual_test_header=${manual_test_header}`;
+                document.cookie = `timezone=${timezone}`;
+                document.cookie = `locale=${navigator.language}`;
+                document.cookie = `color_scheme=${cs}`;
+                document.cookie = `mobile=${mobile}`;
+              });
+            </script>
+            <script>
+              function getLoc () {
+                  const status = document.querySelector("#status");
+                  const mapLink = document.querySelector("#map-link");
+
+                  mapLink.href = "";
+                  mapLink.textContent = "";
+
+                  function success(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    document.cookie = `latitude=${latitude}`;
+                    document.cookie = `longitude=${longitude}`;
+
+                    status.style.display = 'none';
+                    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+                    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+                  }
+
+                  function error() {
+                    status.textContent = "Unable to retrieve your location";
+                  }
+
+                  if (!navigator.geolocation) {
+                    status.textContent = "Geolocation is not supported by your browser";
+                  } else {
+                    status.textContent = "Locating…";
+                    navigator.geolocation.getCurrentPosition(success, error);
+                  }
+              }
+
+            </script>
+        {% endblock %}
+    </body>
+</html>

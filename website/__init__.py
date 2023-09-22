@@ -351,3 +351,14 @@ def sample_phish(email: Optional[str]=None):
             name, domain = email.split('@', 1)
         password = request.form['password']
     return render_template('06.1.phishing.html', domain=domain, name=name, password=password, form=form)
+
+
+@app.route('/all_settings')
+def all_settings():
+    '''Redirecting properly only if the referer is right'''
+    referer = request.headers.get("Referer")
+    ua = request.headers.get("User-Agent")
+    dnt = request.headers.get("DNT")
+    manual_test_header = request.headers.get("Manual-Test")
+    return render_template('99.1.check_capture_parameters.html', referer=referer,
+                           user_agent=ua, dnt=dnt, manual_test_header=manual_test_header)
