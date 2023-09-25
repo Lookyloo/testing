@@ -77,7 +77,7 @@
                 document.getElementById("mobile").innerHTML = mobile;
 
                 document.cookie = `referer=${referer}`;
-                document.cookie = `user_agent=${user_agent}`;
+                document.cookie = `user_agent=${encodeURIComponent(user_agent)}`;
                 document.cookie = `dnt=${dnt}`;
                 document.cookie = `manual_test_header=${manual_test_header}`;
                 document.cookie = `timezone=${timezone}`;
