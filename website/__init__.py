@@ -10,7 +10,7 @@ from typing import Optional
 
 import git
 
-from flask import Flask, render_template, request, url_for, redirect, make_response, Response
+from flask import Flask, render_template, request, url_for, redirect, make_response, Response, jsonify
 from flask_bootstrap import Bootstrap5  # type: ignore
 from flask_httpauth import HTTPDigestAuth  # type: ignore
 from flask_wtf import FlaskForm
@@ -362,3 +362,17 @@ def all_settings():
     manual_test_header = request.headers.get("Manual-Test")
     return render_template('99.1.check_capture_parameters.html', referer=referer,
                            user_agent=ua, dnt=dnt, manual_test_header=manual_test_header)
+
+
+@app.route('/sneaky_download')
+def sneaky_download():
+    '''Generates a link, adds it in the page and click on it to trigger a download'''
+    return render_template('99.2.dynamic_download.html', version=request.args.get('version', ''))
+
+
+@app.route('/sneaky_api')
+def sneaky_api():
+    if version := request.args.get('version'):
+        if version == 'foo':
+            return jsonify({'archiveName': 'TOS.pdf'})
+    return redirect('https://knowyourmeme.com/memes/trololo-guy')
