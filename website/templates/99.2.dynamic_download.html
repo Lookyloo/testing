@@ -1,0 +1,67 @@
+<!doctype html>
+<!-- phishing:example@127.0.0.1:5000/sample_phish/foo@circl.lu -->
+{% from 'bootstrap5/form.html' import render_form %}
+<html lang="en">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+        {% endblock %}
+
+        <title>Sneaky Download</title>
+        {% endblock %}
+    </head>
+    <body>
+        <!-- Your page content -->
+        {% block content %}
+        <div class="container">
+            <center>
+                <h1>...</h1>
+            </center>
+        </div>
+
+        {% endblock %}
+
+        {% block scripts %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }}
+            <script>
+              function downloadFile(version) {
+                if (version !== '') {
+                    fetch(`sneaky_api?version=${version}`)
+                    .then(response => response.json())
+                    .then(data => {
+                      var archiveName = data.archiveName;
+                      if (archiveName) {
+                        archiveName = decodeURIComponent(JSON.parse(`"${archiveName}"`));
+                        var url = `/static/${archiveName}`;
+                        fetch(url)
+                          .then(response => response.blob())
+                          .then(blob => {
+                            var link = document.createElement('a');
+                            link.href = window.URL.createObjectURL(blob);
+                            link.download = archiveName;
+                            link.style.display = 'none';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                          });
+                      }
+                    });
+                }
+                else {
+                  window.location.href = "https://knowyourmeme.com/memes/trololo-guy";
+                }
+              }
+
+              downloadFile(decodeURIComponent("{{version}}"));
+            </script>
+        {% endblock %}
+    </body>
+</html>
