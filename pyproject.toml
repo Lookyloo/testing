@@ -14,7 +14,7 @@ gunicorn = "^21.2.0"
 lxml = "^4.9.3"
 gitpython = "^3.1.37"
 flask-httpauth = "^4.8.0"
-flask-wtf = "^1.1.1"
+flask-wtf = "^1.2.1"
 
 [tool.poetry.dev-dependencies]
 mypy = "^1.5.1"
