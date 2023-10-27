@@ -364,6 +364,12 @@ def all_settings():
                            user_agent=ua, dnt=dnt, manual_test_header=manual_test_header)
 
 
+@app.route('/headless')
+def headless():
+    '''Check if we use a headless browser'''
+    return render_template('99.1.check_headless.html')
+
+
 @app.route('/sneaky_download')
 def sneaky_download():
     '''Generates a link, adds it in the page and click on it to trigger a download'''

@@ -1,0 +1,55 @@
+<html>
+
+<body>
+  <head>
+    <title>Am I using a headless bowser or not?</title>
+  </head>
+
+  <div class="container">
+    <div><b>User Agent</b>: <span id='user-agent'></span></div>
+    <div><b>Eval - windown chrome</b>:
+      <span id='win_chrome'></span>
+      <span id='eval_length'></span>
+      <pre id='eval'></pre>
+    </div>
+    <div><b>Notification perms</b>: <span id='notif-perms'></span> <span id='notif-perms-state'></span></div>
+    <div><b>Plugins</b>: <span id='plugins'></span></div>
+    <div><b>App Version</b>: <span id='app-version'></span></div>
+    <div><b>Connection RTT</b>: <span id='connection'></span> <span id='rtt'></span></div>
+    <div><b>Final score</b>: <span id='score'></span></div>
+  </div>
+
+  <div id=debug_perms></div>
+  <div id=debug_func></div>
+
+</body>
+<script type="text/javascript" src="static/headlessDetect.js"> </script>
+<script>
+    var headlessDetector = new HeadlessDetect();
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const headless_score = headlessDetector.getHeadlessScore();
+      document.getElementById("user-agent").innerHTML = globalThis.user_agent;
+
+      document.getElementById("win_chrome").innerHTML = globalThis.is_win_chrome;
+      document.getElementById("eval_length").innerHTML = globalThis.eval_string_length;
+      document.getElementById("eval").innerHTML = globalThis.eval_string;
+
+      document.getElementById("notif-perms").innerHTML = globalThis.permission;
+      document.getElementById("notif-perms-state").innerHTML = globalThis.permission_state;
+
+      document.getElementById("plugins").innerHTML = globalThis.plugins_length;
+
+      document.getElementById("app-version").innerHTML = globalThis.nav_appversion;
+
+      document.getElementById("connection").innerHTML = globalThis.connection;
+      document.getElementById("rtt").innerHTML = globalThis.connectionRtt;
+
+      document.getElementById("score").innerHTML = headless_score;
+
+      if(headless_score > 0.25){
+          console.log("Headless Browser detected");
+      }
+    })
+</script>
+</html>
