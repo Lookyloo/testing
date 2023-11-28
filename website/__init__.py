@@ -13,10 +13,10 @@ import git
 from flask import Flask, render_template, request, url_for, redirect, make_response, Response, jsonify
 from flask_bootstrap import Bootstrap5  # type: ignore
 from flask_httpauth import HTTPDigestAuth  # type: ignore
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm  # type: ignore
 from ip2geotools.databases.noncommercial import DbIpCity  # type: ignore
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, PasswordField, SubmitField  # type: ignore
+from wtforms.validators import DataRequired  # type: ignore
 
 from .helpers import get_homedir
 from .proxied import ReverseProxied
@@ -382,3 +382,13 @@ def sneaky_api():
         if version == 'foo':
             return jsonify({'archiveName': 'TOS.pdf'})
     return redirect('https://knowyourmeme.com/memes/trololo-guy')
+
+
+@app.route('/compute_sha512')
+def compute_sha512():
+    correct_id = request.cookies.get('_n')
+    _id = request.cookies.get('_m')
+    print(_id)
+    if correct_id and int(correct_id) == 13369:
+        return redirect('https://en.wikipedia.org/wiki/SHA-2')
+    return render_template('99.3.compute_hashes.html')
