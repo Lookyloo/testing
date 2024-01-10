@@ -7,17 +7,17 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-Flask = "^2.3.3"
-Bootstrap-Flask = "^2.3.2"
+Flask = "^3.0.0"
+Bootstrap-Flask = "^2.3.3"
 ip2geotools = "^0.1.6"
 gunicorn = "^21.2.0"
-lxml = "^4.9.3"
-gitpython = "^3.1.40"
+lxml = "^5.1.0"
+gitpython = "^3.1.41"
 flask-httpauth = "^4.8.0"
 flask-wtf = "^1.2.1"
 
 [tool.poetry.dev-dependencies]
-mypy = "^1.7.1"
+mypy = "^1.8.0"
 
 [build-system]
 requires = ["poetry-core"]
