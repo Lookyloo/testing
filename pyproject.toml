@@ -17,7 +17,7 @@ flask-httpauth = "^4.8.0"
 flask-wtf = "^1.2.1"
 
 [tool.poetry.dev-dependencies]
-mypy = "^1.10.0"
+mypy = "^1.10.1"
 
 [build-system]
 requires = ["poetry-core"]
