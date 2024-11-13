@@ -360,6 +360,7 @@ def all_settings():
     ua = request.headers.get("User-Agent")
     dnt = request.headers.get("Dnt")
     manual_test_header = request.headers.get("Manual-Test")
+
     return render_template('99.1.check_capture_parameters.html', referer=referer,
                            user_agent=ua, dnt=dnt, manual_test_header=manual_test_header)
 
@@ -388,7 +389,6 @@ def sneaky_api():
 def compute_sha512():
     correct_id = request.cookies.get('_n')
     _id = request.cookies.get('_m')
-    print(_id)
     if correct_id and int(correct_id) == 13369:
         return redirect('https://en.wikipedia.org/wiki/SHA-2')
-    return render_template('99.3.compute_hashes.html')
+    return render_template('99.3.compute_hashes.html', current_id=_id)
