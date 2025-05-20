@@ -10,12 +10,12 @@ from pathlib import Path
 from typing import Optional
 
 import git
+import requests
 
 from flask import Flask, render_template, request, url_for, redirect, make_response, Response, jsonify
 from flask_bootstrap import Bootstrap5  # type: ignore
 from flask_httpauth import HTTPDigestAuth  # type: ignore
 from flask_wtf import FlaskForm  # type: ignore
-from ip2geotools.databases.noncommercial import DbIpCity  # type: ignore
 from wtforms import StringField, PasswordField, SubmitField  # type: ignore
 from wtforms.validators import DataRequired  # type: ignore
 
@@ -282,10 +282,10 @@ def ip():
     '''Redirects to different places depending on the CC of the IP doing the request'''
     ip = ipaddress.ip_address(request.remote_addr)
     try:
-        response = DbIpCity.get(ip, api_key='free')
-        cc = response.country
-    except Exception:
-        cc = 'No Clue.'
+        response = requests.get(f'https://ip.circl.lu/geolookup/{ip}').json()
+        cc = response[0]['country']['iso_code']
+    except Exception as e:
+        cc = f'No Clue: {e}'
     return render_template('ip.html', ip=ip, cc=cc)
 
 
