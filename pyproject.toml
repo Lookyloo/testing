@@ -6,19 +6,19 @@ authors = ["Raphaël Vinot <raphael@lookyloo.eu>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-Flask = "^3.1.1"
+python = "^3.12"
+Flask = "^3.1.2"
 Bootstrap-Flask = "^2.5.0"
 gunicorn = "^23.0.0"
-lxml = "^5.4.0"
-gitpython = "^3.1.44"
+lxml = "^6.0.2"
+gitpython = "^3.1.45"
 flask-httpauth = "^4.8.0"
 flask-wtf = "^1.2.2"
-requests = "^2.32.3"
+requests = "^2.32.5"
 
 [tool.poetry.group.dev.dependencies]
-mypy = "^1.15.0"
-types-requests = "^2.32.0.20250515"
+mypy = "^1.18.2"
+types-requests = "^2.32.4.20250913"
 
 [build-system]
 requires = ["poetry-core"]
