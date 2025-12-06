@@ -17,7 +17,7 @@ flask-wtf = "^1.2.2"
 requests = "^2.32.5"
 
 [tool.poetry.group.dev.dependencies]
-mypy = "^1.18.2"
+mypy = "^1.19.0"
 types-requests = "^2.32.4.20250913"
 
 [build-system]
